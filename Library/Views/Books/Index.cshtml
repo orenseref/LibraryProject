@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Library.Models.Entities.TBLBook>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("Index","Books",FormMethod.Get))
+            {
+                <div style="margin-bottom:15px;margin-top:15px;">
+                    <b>Search Book : </b> @Html.TextBox("p")
+                    <input type="submit" value="Search" />
+                </div>
+            }
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BookName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Statu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TBLAuthor.AuthorName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TBLCategory.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TBLSubCategory.SubCategoryName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Statu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TBLAuthor.AuthorName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TBLCategory.CategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TBLSubCategory.SubCategoryName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BookID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BookID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BookID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,51 @@
+﻿@model Library.Models.Entities.TBLBorrow
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Borrow</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BorrowDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BorrowDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReturnDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TBLBook.BookName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TBLBook.BookName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TBLMember.MemberName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TBLMember.MemberName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BorrowID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

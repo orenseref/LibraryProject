@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Library.Models.Entities.TBLMember>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MemberName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MemberMail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MemberPhone)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemberName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemberMail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemberPhone)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MemberID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MemberID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MemberID })
+        </td>
+    </tr>
+}
+
+</table>

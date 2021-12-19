@@ -1,0 +1,82 @@
+﻿
+@{ Layout = null; }
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 150px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #000000;
+            overflow-x: hidden;
+            padding-top: 16px;
+        }
+
+            .sidebar a {
+                padding: 6px 8px 6px 16px;
+                text-decoration: none;
+                font-size: 14px;
+                color: #818181;
+                display: block;
+            }
+
+                .sidebar a:hover {
+                    color: #f1f1f1;
+                }
+
+        .main {
+            margin-left: 150px; 
+            padding: 0px 10px;
+        }
+
+        @@media screen and (max-height: 450px) {
+            .sidebar {
+                padding-top: 15px;
+            }
+
+                .sidebar a {
+                    font-size: 18px;
+                }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <a href="#"><i class="glyphicon glyphicon-home"></i> &nbsp; Home Page </a>
+        <a href="/Categories/Index"><i class="glyphicon glyphicon-list"></i> &nbsp; Categories </a>
+        <a href="/SubCategories/Index"><i class="glyphicon glyphicon-list"></i> &nbsp; Sub Categories </a>
+        <a href="/Books/Index"><i class="glyphicon glyphicon-book"></i> &nbsp; Books </a>
+        <a href="/Authors/Index"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Writers </a>
+        <a href="/Members/Index"><i class="glyphicon glyphicon-user"></i> &nbsp; Members </a>
+        <a href="#"><i class="glyphicon glyphicon-list-alt"></i> &nbsp; Borrows </a>
+        @*<a href="#"><i class="glyphicon glyphicon-circle-arrow-right"></i> &nbsp; Borrow Books </a>
+        <a href="#"><i class="glyphicon glyphicon-circle-arrow-left"></i> &nbsp; Return Books </a>
+        <a href="#"><i class="glyphicon glyphicon-cog"></i> &nbsp; Settings </a>
+        <a href="/Yardim/Index/"><i class="glyphicon glyphicon-phone"></i> &nbsp; Help </a>
+        <a href="/Panelim/CikisYap/"><i class="glyphicon glyphicon-remove-sign"></i> &nbsp; Exit </a>*@
+
+
+    </div>
+
+    <div class="main">
+        @if (IsSectionDefined("scripts"))
+        {
+            @RenderSection("scripts");          
+        }
+        @RenderBody()
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+﻿@model Library.Models.Entities.TBLBook
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://code.jquery.com/jquery-1.7.1.js" integrity="sha256-n8wkEJNAWUaIUDnfQoz6fwBRofK9vMWjE6F3qeNfiAY=" crossorigin="anonymous"></script>
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Book</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.BookName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.BookName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.BookName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Category", "Category", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("CategoryID", ViewBag.CategorySelectList as SelectList, "Select Category", htmlAttributes: new { @class = "form-control", @id = "Category" })
+            @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+        </div>
+     </div>
+    <div class="form-group">
+        @Html.Label("SubCategory", "SubCategory Name", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("SubCategoryID", ViewBag.SubCategoryListSelectList as SelectList, "Select SubCategory", htmlAttributes: new { @class = "form-control", @disabled = "disabled", @id = "SubCategory" })
+            @Html.ValidationMessageFor(model => model.SubCategory, "", new { @class = "text-danger" })
+        </div>
+    </div>
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Category, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Category", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubCategory, "SubCategory", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("SubCategory", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SubCategory, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Author, "Author", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Author", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Statu, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Statu)
+                    @Html.ValidationMessageFor(model => model.Statu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+      $(document).on('change','#Category', function(){
+          var CategoryID = $(this).val();
+          $('#SubCategory').empty();
+          if (CategoryID) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetSubCategoryByCategory", "BooksController")',
+                data: { CategoryID: CategoryID},
+                success: function(data) {
+                    if (data.length > 0) {
+                        $('#SubCategory').prop("disabled", false);
+                        $('#SubCategory').append($("<option>").val("").text("Select SubCategory"));
+                        $(data).each(function(index, item) {
+                            $('#SubCategory').append($("<option>").val(item.SubCategoryID).text(item.SubCategoryName));
+                        });
+                    } else {
+                        $('#SubCategory').append($("<option>").val("").text("SubCategory List Is Empty"));
+                    }
+                }
+            });
+        } else {
+              $('#SubCategory').prop("disabled", true);
+            $('#SubCategory').append($("<option>").val("").text("Select Category First"));
+        }
+      });
+    </script>
+}

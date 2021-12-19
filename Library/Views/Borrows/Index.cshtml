@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Library.Models.Entities.TBLBorrow>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BorrowDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TBLBook.BookName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TBLMember.MemberName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BorrowDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReturnDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TBLBook.BookName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TBLMember.MemberName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BorrowID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BorrowID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BorrowID })
+        </td>
+    </tr>
+}
+
+</table>

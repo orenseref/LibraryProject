@@ -1,0 +1,57 @@
+﻿@model Library.Models.Entities.TBLBorrow
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Borrow</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BorrowDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BorrowDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReturnDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TBLBook.BookName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TBLBook.BookName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TBLMember.MemberName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TBLMember.MemberName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
